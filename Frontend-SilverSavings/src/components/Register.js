@@ -7,20 +7,23 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+  const isLoggedIn = localStorage.getItem("userID")
+  if(isLoggedIn){
+    window.location.href = "/home"
+  }
+
+  const url = process.env.REACT_APP_API_URL + "/register";
+
   const handleRegister = async (e) => {
-    console.log("Here");
-    console.log("API URL:", process.env.REACT_APP_API_URL);
+    
+    
 
     e.preventDefault();
     // POST /register
-
-    const url = "http://localhost:8000" + "/register";
-    console.log("hello")
-  
-
-    console.log('Registering with:', email, password);
+    
     try {
         const response = await axios.post(url, {email, password})
+        console.log(response)
         navigate('/');
     } catch(err) {
         alert(err.message); 
@@ -28,6 +31,7 @@ const Register = () => {
     
     // Add your login logic here, such as API calls
   };
+  
 
   return (
     <div className="login-container">

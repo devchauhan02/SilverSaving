@@ -6,7 +6,7 @@ const ExpenseSchema = mongoose.Schema({
         required: true,
     }, 
     text: {
-        type: String,
+        type: String, // like groceries , tv, etc like where do u spend this amount
     }
 })
 

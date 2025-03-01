@@ -17,8 +17,8 @@ root.render(
   <React.StrictMode>
     <Navbar />
     <Router>
-      <Routes>
-      <Route path="/home" element={<Home />} />
+      <Routes >
+        <Route path="/home" element={<Home />} />
         <Route path="/calculate" element={<App />} /> {/* Render App component at the root */}
         <Route path="/keyfeatures" element={<KeyFeatures />} /> {/* Route for KeyFeatures */}
         <Route path="/" element={<Login />} />

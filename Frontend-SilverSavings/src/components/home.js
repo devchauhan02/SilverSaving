@@ -1,6 +1,11 @@
 import React from 'react';
 
 const Home = () => {
+  const isLoggedIn = localStorage.getItem("userID")
+  if(!isLoggedIn){
+    window.location.href = "/"
+  }
+
   return (
     <div className="home">
       <div className="content">

@@ -6,11 +6,14 @@ const { Expense } = require('./models/Expense.js');
 const cors = require('cors');
 const path = require('path');
 
-mongoose.connect(process.env.MONGO_URL);
+mongoose.connect(process.env.MONGO_URL).then(e=>{
+  console.log("Backend Connected Successfully");
+})
+
 const app = express();
 app.use(cors({
   origin: true, // Adjust as needed for your setup
-}));
+}));  
 app.use(express.json());
 
 app.use((req, res, next) => {
@@ -31,13 +34,16 @@ app.post('/register', async (req, res) => {
 
 app.post('/login', async (req, res) => {
     const { email, password } = req.body; 
-    const account = await User.findOne().where('email').equals(email);
+    
+    const account = await User.findOne({
+      email : email
+    })
     if (!account) return res.status(404).json({success: false, msg: "Account does not exist"})
 
     const match = account.password == password; 
     if (!match) return res.status(400).json({success: false, msg: "Invalid password"}); 
 
-    res.status(200).json({success: true, userID: account._id})
+    res.status  (200).json({success: true, userID: account._id})
 })
 
 app.post('/expenses', async (req, res) => {

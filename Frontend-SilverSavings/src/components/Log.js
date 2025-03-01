@@ -7,6 +7,11 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+  const isLoggedIn = localStorage.getItem("userID")
+  if(isLoggedIn){
+    window.location.href = "/home"
+  }
+
   const handleLogin = async (e) => {
     e.preventDefault();
     // Add your login logic here, such as API calls
@@ -18,7 +23,7 @@ const Login = () => {
       console.log('Logging in with:', email, password);
       const userID = response.data.userID; 
       localStorage.setItem("userID", userID); 
-      navigate('/home');
+      window.location.href = "/home"
     } catch(err) {
       alert("Account Not Found!!"); 
     }
